@@ -43,7 +43,7 @@ class NavigationNode(Node):
         self.goal_y = [126.0, 126.1]
         self.latitude_buffer = []
         self.longitude_buffer = []
-        self.sailing_section = None
+        self.sailing_section = "first"
         self.thruster_msg = 0.0
 
         self.br = CvBridge()
