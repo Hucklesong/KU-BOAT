@@ -149,7 +149,14 @@ def main(args=None):
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
-        node.set_thruster_and_servo(0.0, 90.0)
+        print("\n[Ctrl+C] 사용자 종료 요청 - Thruster/Servo 정지")
+        # 안전 정지: Thruster 0, Servo 90(직진)
+        thruster_msg = Float32()
+        thruster_msg.data = 0.0
+        node.thruster_publisher.publish(thruster_msg)
+        servo_msg = Float32()
+        servo_msg.data = 90.0
+        node.servo_publisher.publish(servo_msg)
     finally:
         node.destroy_node()
         rclpy.shutdown()
